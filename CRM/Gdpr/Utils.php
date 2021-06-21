@@ -745,4 +745,11 @@ WHERE url.time_stamp > '{$date}'";
     return substr(bin2hex($bytes), 0, $lenght);
   }
 
+  public static function checkEventParticipation($cid) {
+    $count = civicrm_api3('Participant', 'getcount', [
+      'contact_id' => $cid,
+    ]);
+    return $count;
+  }
+
 }//End Class

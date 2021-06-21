@@ -26,6 +26,10 @@ class CRM_Gdpr_Form_Forgetme extends CRM_Core_Form {
     // <!-- To DO - check permission -->
 
     $this->_contactID = CRM_Utils_Request::retrieve('cid', 'Positive', $this, TRUE);
+    if (CRM_Gdpr_Utils::checkEventParticipation($this->_contactID)) {
+      // This contact cannot be forgotten
+      CRM_Core_Error::statusBounce(ts('Contact %1 has one or more event participation records.', [1 => CRM_Contact_BAO_Contact::displayName($this->_contactID)]), "", ts('Unable to anonymize'));
+    }
   }
 
   public function buildQuickForm() {
