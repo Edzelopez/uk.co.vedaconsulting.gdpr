@@ -14,11 +14,6 @@ class CRM_Gdpr_Page_Tab extends CRM_Core_Page {
   	$this->assign('groupSubscriptions', $groupSubscriptions);
   	$this->assign('contactId', $contactId);
 
-  	// Check if contact has an event participation, show forget me button if they don't.
-    if (CRM_Gdpr_Utils::checkEventParticipation($contactId)) {
-      $this->assign('hideForgetMe', true);
-    }
-
     $summary['communications_preferences'] = $this->getCommunicationsPreferencesDetails($contactId);
     $summary['data_policy'] = $this->getDataPolicyDetails($contactId);
     $this->assign('summary', $summary);
